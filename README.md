@@ -2,7 +2,7 @@ Cellular Automaton — Rust + Flutter Web (WebAssembly)
 
 Eine interaktive Simulation zellularer Automaten im Browser. Der Simulationskern ist in Rust geschrieben und läuft als WebAssembly-Modul, die Oberfläche ist mit Flutter Web umgesetzt.
 
-![Screenshot der Simulation](cellular-automaton/docs/screenshot.png)
+![Screenshot der Simulation](cellular-automaton/docs/sceenshot.png)
 Tech-Stack
 
 Rust – Simulationskern (ca_core), kompiliert zu WebAssembly via wasm-bindgen / wasm-pack
