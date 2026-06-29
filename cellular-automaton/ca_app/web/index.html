@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="Cellular Automaton" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="ca_app" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>Cellular Automaton</title>
+    <link rel="manifest" href="manifest.json" />
+    <base href="$FLUTTER_BASE_HREF" />
+
+    <script src="pkg/ca_core.js"></script>
+    <script>
+      // WASM synchron laden – Funktionen erst nach initSync aus wasm_bindgen lesen
+      fetch("pkg/ca_core_bg.wasm")
+        .then((r) => r.arrayBuffer())
+        .then((bytes) => {
+          wasm_bindgen.initSync({ module: bytes });
+          window.init_simulator = wasm_bindgen.init_simulator;
+          window.tick = wasm_bindgen.tick;
+          window.step = wasm_bindgen.step;
+          window.reset = wasm_bindgen.reset;
+          window.toggle_cell = wasm_bindgen.toggle_cell;
+          window.set_rule = wasm_bindgen.set_rule;
+          window.wasmReady = true;
+          console.log("WASM geladen ✅");
+        })
+        .catch((e) => console.error("WASM Fehler:", e));
+    </script>
+  </head>
+  <body>
+    <script src="flutter_bootstrap.js" async></script>
+  </body>
+</html>
